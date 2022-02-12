@@ -285,7 +285,7 @@ class GtkUI(Gtk3PluginBase, GtkUiNotifications):
 
     def enable(self):
         self.config = deluge.configmanager.ConfigManager(
-            'notifications-gtk.conf', DEFAULT_PREFS
+            'notificationsplus-gtk.conf', DEFAULT_PREFS
         )
         self.builder = Gtk.Builder()
         self.builder.add_from_file(get_resource('config.ui'))
@@ -297,7 +297,7 @@ class GtkUI(Gtk3PluginBase, GtkUiNotifications):
         self.build_sounds_model_populate_treeview()
         self.build_notifications_model_populate_treeview()
 
-        client.notifications.get_handled_events().addCallback(
+        client.notificationsplus.get_handled_events().addCallback(
             self.popuplate_what_needs_handled_events
         )
 
@@ -320,7 +320,7 @@ class GtkUI(Gtk3PluginBase, GtkUiNotifications):
             }
         )
 
-        component.get('Preferences').add_page(_('Notifications'), self.prefs)
+        component.get('Preferences').add_page(_('NotificationsPlus'), self.prefs)
 
         component.get('PluginManager').register_hook(
             'on_apply_prefs', self.on_apply_prefs
@@ -350,7 +350,7 @@ class GtkUI(Gtk3PluginBase, GtkUiNotifications):
 
     def disable(self):
         GtkUiNotifications.disable(self)
-        component.get('Preferences').remove_page(_('Notifications'))
+        component.get('Preferences').remove_page(_('NotificationsPlus'))
         component.get('PluginManager').deregister_hook(
             'on_apply_prefs', self.on_apply_prefs
         )
@@ -529,7 +529,7 @@ class GtkUI(Gtk3PluginBase, GtkUiNotifications):
             )
 
     def on_apply_prefs(self):
-        log.debug('applying prefs for Notifications')
+        log.debug('applying prefs for NotificationsPlus')
 
         current_popup_subscriptions = []
         current_blink_subscriptions = []
@@ -593,11 +593,11 @@ class GtkUI(Gtk3PluginBase, GtkUiNotifications):
             'tg_chat_id': self.builder.get_object('tg_chat_id').get_text(),
         }
 
-        client.notifications.set_config(core_config)
-        client.notifications.get_config().addCallback(self.cb_get_config)
+        client.notificationsplus.set_config(core_config)
+        client.notificationsplus.get_config().addCallback(self.cb_get_config)
 
     def on_show_prefs(self):
-        client.notifications.get_config().addCallback(self.cb_get_config)
+        client.notificationsplus.get_config().addCallback(self.cb_get_config)
 
     def cb_get_config(self, core_config):
         """Callback for on show_prefs."""
@@ -639,14 +639,14 @@ class GtkUI(Gtk3PluginBase, GtkUiNotifications):
         self.on_tg_enabled_toggled(self.builder.get_object('tg_enabled'))
         self.on_sound_enabled_toggled(self.builder.get_object('sound_enabled'))
 
-        client.notifications.get_handled_events().addCallback(
+        client.notificationsplus.get_handled_events().addCallback(
             self.popuplate_what_needs_handled_events,
             core_config['subscriptions']['email'],
             core_config['subscriptions']['telegram'],
         )
 
     def on_sound_path_update_preview(self, filechooser):
-        client.notifications.get_handled_events().addCallback(self.populate_sounds)
+        client.notificationsplus.get_handled_events().addCallback(self.populate_sounds)
 
     def on_add_button_clicked(self, widget, treeview):
         model = treeview.get_model()

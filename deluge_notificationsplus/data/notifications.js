@@ -16,7 +16,7 @@ Ext.ns('Deluge.ux.preferences');
  * @extends Ext.Panel
  */
 Deluge.ux.preferences.NotificationsPage = Ext.extend(Ext.Panel, {
-    title: _('Notifications'),
+    title: _('NotificationsPlus'),
     header: false,
     layout: 'fit',
     border: false,
@@ -457,7 +457,7 @@ Deluge.ux.preferences.NotificationsPage = Ext.extend(Ext.Panel, {
     },
 
     updateConfig: function () {
-        deluge.client.notifications.get_handled_events({
+        deluge.client.notificationsplus.get_handled_events({
             success: function (events) {
                 var data = [];
                 var keys = Ext.keys(events);
@@ -469,7 +469,7 @@ Deluge.ux.preferences.NotificationsPage = Ext.extend(Ext.Panel, {
             },
             scope: this,
         });
-        deluge.client.notifications.get_config({
+        deluge.client.notificationsplus.get_config({
             success: function (config) {
                 this.chkEnableEmail.setValue(config['smtp_enabled']);
                 this.chkEnableTG.setValue(config['tg_enabled']);
@@ -552,7 +552,7 @@ Deluge.ux.preferences.NotificationsPage = Ext.extend(Ext.Panel, {
         subscriptions['telegram'] = telegramEventList;
         config['subscriptions'] = subscriptions;
 
-        deluge.client.notifications.set_config(config);
+        deluge.client.notificationsplus.set_config(config);
     },
 
     onOk: function () {
@@ -604,8 +604,8 @@ Deluge.ux.preferences.NotificationsPage = Ext.extend(Ext.Panel, {
     },
 });
 
-Deluge.plugins.NotificationsPlugin = Ext.extend(Deluge.Plugin, {
-    name: 'Notifications',
+Deluge.plugins.NotificationsPlusPlugin = Ext.extend(Deluge.Plugin, {
+    name: 'NotificationsPlus',
 
     onDisable: function () {
         deluge.preferences.removePage(this.prefsPage);
@@ -618,4 +618,4 @@ Deluge.plugins.NotificationsPlugin = Ext.extend(Deluge.Plugin, {
     },
 });
 
-Deluge.registerPlugin('Notifications', Deluge.plugins.NotificationsPlugin);
+Deluge.registerPlugin('NotificationsPlus', Deluge.plugins.NotificationsPlusPlugin);

@@ -8,7 +8,7 @@ _NotificationsPlus_ is a fork of [_Notifications_](https://github.com/deluge-tor
 
 The idea behind telegram's integrations is a bot sending notification to chat [Private Chat, Group, Channel] when a new torrent is added to the queue or when a torrent is completed.
 
-**This plugin is superficially named "NotificationsPlus" but in the code is still named "Notifications" because it is meant to replace the original plugin, they can't coexists**.
+**Due to compatibility issues the plugin has name been completely rename to 'NotificationsPlus', it can run side-by-side the original plugin but it is unrecommended!**.
 
   * [Requirements](#requirements)
   * [Installation](#installation)
@@ -58,7 +58,7 @@ Afterwards, you must retrieve the _Chat ID_ of your desired chat.
 
 Now you must save the settings by clicking on "Apply" button. 
 
-Now that you Telegram integration is enabled and configured, go to `Preferences -> Notifications -> Subscriptions` and enable the Telegram notification for your desidered Event.
+Now that you Telegram integration is enabled and configured, go to `Preferences -> NotificationsPlus -> Subscriptions` and enable the Telegram notification for your desidered Event.
 
 ## Development
 

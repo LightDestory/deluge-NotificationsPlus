@@ -14,10 +14,10 @@
 
 from setuptools import find_packages, setup
 
-__plugin_name__ = 'Notifications'
+__plugin_name__ = 'NotificationsPlus'
 __author__ = 'Pedro Algarvio'
 __author_email__ = 'pedro@algarvio.me'
-__version__ = '0.5'
+__version__ = '0.6'
 __url__ = 'http://dev.deluge-torrent.org/'
 __license__ = 'GPLv3'
 __description__ = 'Plugin which provides notifications to Deluge.'

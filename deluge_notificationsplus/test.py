@@ -39,12 +39,12 @@ class TestEmailNotifications(component.Component):
         log.debug('\n\nEnabling %s', self.__class__.__name__)
         for event in self.events:
             if self.__imp == 'core':
-                # component.get('CorePlugin.Notifications').register_custom_email_notification(
-                component.get('Notifications').register_custom_email_notification(
+                # component.get('CorePlugin.NotificationsPlus').register_custom_email_notification(
+                component.get('NotificationsPlus').register_custom_email_notification(
                     event.__class__.__name__, self.custom_email_message_provider
                 )
             elif self.__imp == 'gtk':
-                notifications_component = component.get('Notifications')
+                notifications_component = component.get('NotificationsPlus')
                 notifications_component.register_custom_popup_notification(
                     event.__class__.__name__, self.custom_popup_message_provider
                 )
